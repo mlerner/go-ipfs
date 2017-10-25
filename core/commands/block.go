@@ -193,6 +193,11 @@ It reads from stdin, and <key> is a base58 encoded multihash.
 			return
 		}
 
+		if err := n.Providers.Provide(k); err != nil {
+			log.Error("BlockPut key: '%q'", err)
+			return
+		}
+
 		res.SetOutput(&BlockStat{
 			Key:  k.String(),
 			Size: len(data),
